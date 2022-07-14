@@ -10,6 +10,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 builder.Services.AddTransient<IProductRepository, ProductsRepository>();
+builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -17,6 +21,7 @@ app.UseDeveloperExceptionPage();
 app.UseStatusCodePages();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseSession();
 
 app.UseRouting();
 
