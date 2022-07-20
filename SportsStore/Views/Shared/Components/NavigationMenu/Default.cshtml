@@ -1,12 +1,14 @@
 ﻿@model IEnumerable<string>
 
-<a class="btn btn-block btn-secondary" asp-action="List" asp-controller="Product" asp-route-category="">
-    Home
-</a>
+<nav class="nav flex-column">
+    <a class="btn btn-block btn-outline-secondary" asp-action="List" asp-controller="Product" asp-route-category="">
+        Home
+    </a>
 
-@foreach (var category in Model)
-{
-    <a class="btn btn-block @(category == ViewBag.SelectedCategory ? "btn-primary": "btn-secondary")" asp-action="List" asp-controller="Product" 
-    asp-route-category="@category"
-    asp-route-productPage="1">@category</a>
-}
+    @foreach (var category in Model)
+    {
+       <a class="btn btn-block @(category == ViewBag.SelectedCategory ? "btn-primary": "btn-outline-secondary")" asp-action="List" asp-controller="Product"
+       asp-route-category="@category"
+       asp-route-productPage="1">@category</a>
+    }
+</nav>
